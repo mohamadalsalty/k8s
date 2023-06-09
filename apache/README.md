@@ -48,3 +48,12 @@ kubectl apply -f replicaset.yaml -n dev
 kubectl apply -f service.yaml -n dev
 kubectl get all -n dev
 kubectl port-forward service/backend-service -n dev 8080:80
+```
+
+### Create Secret and List it
+```bash
+kubectl apply -f secret.yaml
+kubectl get secret my-creds --output=jsonpath='{.data.username}' | base64 --decode
+
+
+
