@@ -33,3 +33,16 @@ Before you begin, make sure you have the following installed and configured:
 
    ```bash
     kubectl port-forward service/nodejs-service 3000:3000 -n dev
+
+5. **Using ingress**
+
+   You can also use the ingress, to get the ingress ip use the following command:
+
+   ```bash
+   kubectl get ingress -n dev
+   ```
+
+   After that add the ip to your hosts with the hostname www.nodejs.local.com
+   example:  
+   ```bash
+   echo "192.168.49.2 www.nodejs.local.com" >> /etc/hosts
