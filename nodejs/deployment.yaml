@@ -32,8 +32,8 @@ spec:
               memory: "256Mi"
           securityContext:
             allowPrivilegeEscalation: false
-            runAsUser: 100
-            runAsGroup: 101
+            runAsUser: 1000
+            runAsGroup: 1000
             runAsNonRoot: true
             capabilities:
               drop:
