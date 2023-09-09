@@ -46,6 +46,7 @@ kubectl apply -f namespace.yaml
 kubectl apply -f deployment.yaml -n dev
 kubectl apply -f replicaset.yaml -n dev
 kubectl apply -f service.yaml -n dev
+kubectl apply -f cronjob.yaml -n dev
 kubectl get all -n dev
 kubectl port-forward service/backend-service -n dev 8080:80
 ```

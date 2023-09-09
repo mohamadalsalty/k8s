@@ -10,7 +10,7 @@ metadata:
   name: nodejs-k8s
   namespace: dev
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: nodejs-k8s
@@ -58,3 +58,26 @@ spec:
                 name: nodejs-service
                 port:
                   number: 3000
+--- 
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nodejs-cronjob
+  namespace: dev
+spec:
+  schedule: "* * * * *"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello Nodejs app
+          restartPolicy: OnFailure
