@@ -3,6 +3,13 @@ kind: Namespace
 metadata:
   name: dev
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dotenv
+data:
+  .env: dmFsdWUtMg0KDQo=
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,9 +25,17 @@ spec:
       labels:
         app: nodejs-k8s
     spec:
+      volumes:
+        - name: dotenv-volume
+          secret:
+            secretName: dotenv
       containers:
         - name: nodejs-k8s
           image: mohamadalsalty/nodejs-k8s:latest
+          volumeMounts:
+            - name: dotenv-volume
+              readOnly: true
+              mountPath: "/usr/src/app/"
           ports:
             - containerPort: 3000
           resources:
